@@ -1,0 +1,18 @@
+#game-canvas {
+  border: 1px solid black;
+  /* width: 778px;
+  height: 625px; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+.control{
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  transform: translate(-50%)
+}
+.control, select, option {
+  font-size: 25px;
+}
