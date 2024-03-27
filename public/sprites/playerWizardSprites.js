@@ -3,7 +3,7 @@ const defaultSpriteConfig = {
   height: 190,
 };
 
-export const characterSprites = {
+export const playerWizardSprites = {
   sections: {
     attack1: {
       ...defaultSpriteConfig,

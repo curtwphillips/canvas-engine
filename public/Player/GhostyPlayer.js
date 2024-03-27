@@ -1,26 +1,27 @@
 import { drawSpriteSection } from "../draw/sprites.js";
 import { pressedKeys } from "../inputs/keyboard.js";
-import { characterSprites } from "../sprites/character.js";
+import { playerGhostySprites } from "../sprites/playerGhostySprites.js";
 
-export class Player {
+export class GhostyPlayer {
   constructor() {
     console.debug('***** start constructor');
-    this.staggerLimit = 13;
+    this.staggerLimit = 0;
     this.playerState = 'idle';
     this.stagger = 0;
     this.frame = 1;
-    this.movementCanvasColumnSpeed = 1;
+    this.movementCanvasColumnSpeed = .01;
+    this.velocity = 5;
     this.isAnimated = true;
     this.canvasStartColumn = 5;
-    this.canvasStartRow = 5;
-    this.canvasColumnSpan = 8;
-    this.canvasRowSpan = 8;
-    this.sections = characterSprites.sections;
+    this.canvasStartRow = 1;
+    this.canvasColumnSpan = 1;
+    this.canvasRowSpan = 2;
+    this.sections = playerGhostySprites.sections;
     console.debug('***** this.playerState:', this.playerState);
   }
   draw() {
-    let playerActiveSprite = characterSprites.sections[this.playerState];
-    console.debug('**** characterSprites:', characterSprites, ', this.playerState:', this.playerState, ', playerActiveSprite:', playerActiveSprite)
+    let playerActiveSprite = playerGhostySprites.sections[this.playerState];
+    console.debug('**** playerGhostySprites:', playerGhostySprites, ', this.playerState:', this.playerState, ', playerActiveSprite:', playerActiveSprite)
     if (this.stagger < this.staggerLimit) {
       this.stagger++;
     } else {
@@ -43,27 +44,27 @@ export class Player {
       repeatHorizontal: 1,
       repeatVertical: 1,
       sectionName: this.playerState,
-      spriteSheet: characterSprites,
+      spriteSheet: playerGhostySprites,
     })
   }
   update() {
     if (pressedKeys['ArrowLeft']) {
-      this.playerState = 'run';
+      this.playerState = 'idle';
       this.canvasStartColumn -= 1;
       return;
     }
     if (pressedKeys['ArrowRight']) {
-      this.playerState = 'run';
+      this.playerState = 'idle';
       this.canvasStartColumn += 1;
       return;
     }
     if (pressedKeys['ArrowUp']) {
-      this.playerState = 'run';
+      this.playerState = 'idle';
       this.canvasStartRow -= 1;
       return;
     }
     if (pressedKeys['ArrowDown']) {
-      this.playerState = 'run';
+      this.playerState = 'idle';
       this.canvasStartRow += 1;
       return;
     }
@@ -72,6 +73,6 @@ export class Player {
   }
 }
 
-for (let key in characterSprites.sections) {
-  characterSprites.sections[key].width = characterSprites.sections[key].fullWidth / characterSprites.sections[key].spriteCount;
+for (let key in playerGhostySprites.sections) {
+  playerGhostySprites.sections[key].width = playerGhostySprites.sections[key].fullWidth / playerGhostySprites.sections[key].spriteCount;
 }
